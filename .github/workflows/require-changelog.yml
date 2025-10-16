@@ -1,0 +1,36 @@
+name: Require CHANGELOG entry
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  check-changelog:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify CHANGELOG or skip-changelog
+        shell: bash
+        run: |
+          set -euo pipefail
+          TITLE="${{ github.event.pull_request.title }}"
+          BODY="${{ github.event.pull_request.body }}"
+
+          if echo "${TITLE} ${BODY}" | grep -qi "skip-changelog"; then
+            echo "skip-changelog gefunden → Check wird übersprungen."
+            exit 0
+          fi
+
+          git fetch origin "${{ github.base_ref }}":"basebranch"
+          git diff --name-only basebranch...HEAD | tee /tmp/changed.txt
+
+          if grep -q "^CHANGELOG\.md$" /tmp/changed.txt; then
+            echo "CHANGELOG.md geändert ✅"
+          else
+            echo "::error::Bitte CHANGELOG.md aktualisieren (oder 'skip-changelog' im PR-Titel/Body)."
+            exit 1
+          fi
