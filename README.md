@@ -1,14 +1,15 @@
-# 🚀 Scope Your Project – Gruppe 7
-
 <p align="center">
-  <img src="docs/images/scope-g7-logo.png" width="180" alt="Scope G7 Logo">
+  <img src="docs/images/scope-g7-logo.png" alt="Scope G7 Logo" width="180" style="border-radius: 20px;"/>
 </p>
+
+<h1 align="center">🚀 Scope Your Project – Gruppe 7</h1>
 
 <h3 align="center">💡 Releases & Change Management</h3>
 
 <p align="center">
-Dieses Repository gehört zur <strong>Gruppe 7</strong> des Moduls <em>Scope Your Project (HSLU)</em>.<br>
-Ziel ist es, den vollständigen Lebenszyklus von Software-Releases – von der Versionierung bis zum Deployment – praxisnah zu verstehen und zu dokumentieren.
+  Dieses Repository gehört zur <strong>Gruppe 7</strong> des Moduls <em>Scope Your Project (HSLU)</em>.<br>
+  Ziel ist es, den vollständigen Lebenszyklus von Software-Releases – von der Versionierung bis zum Deployment –<br>
+  praxisnah zu verstehen, zu planen und zu dokumentieren.
 </p>
 
 ---
