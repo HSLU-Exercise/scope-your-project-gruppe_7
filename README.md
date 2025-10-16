@@ -99,7 +99,7 @@ scope-your-project-gruppe_7/
 |------|--------|--------------|
 | **Ulrich Luca** | 🧭 Product Owner | Verantwortlich für Vision, Anforderungen & Abnahme der Releases |
 | **Nikola Loosli** | ⚙️ Scrum Master | Moderiert Prozesse, fördert Teamflow & koordiniert Sprints |
-| **Nando Manuel Brauchli** | 🧠 Release Manager / DevOps | Verantwortlich für Versionierung, CI/CD Workflows, Automation & Dokumentation |
+| **Nando Brauchli** | 🧠 Release Manager / DevOps | Verantwortlich für Versionierung, CI/CD Workflows, Automation & Dokumentation |
 | **Joshua Lipp** | 💻 Technical Writer / Change Coordinator | Dokumentiert Change Requests, pflegt Changelog & Wiki-Struktur |
 | **André Bucheli** | 🧩 QA Engineer / Tester | Testet Deployments, validiert Rollbacks und Release-Stabilität |
 
