@@ -1,7 +1,7 @@
 # 🚀 Scope Your Project – Gruppe 7
 
 <p align="center">
-  <img src="docs/images/ChatGPT Image 16. Okt. 2025, 19_24_58.png" width="180" alt="Scope G7 Logo">
+  <img src="docs/images/scope-g7-logo.png" width="180" alt="Scope G7 Logo">
 </p>
 
 <h3 align="center">💡 Releases & Change Management</h3>
