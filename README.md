@@ -1,16 +1,24 @@
+# 🚀 Scope Your Project – Gruppe 7
+
+![docs](https://img.shields.io/badge/docs-ready-444) 
+![online](https://img.shields.io/badge/online-yes-1a73e8)
+![build](https://img.shields.io/badge/build-passing-28a745)
+![license](https://img.shields.io/badge/license-HSLU-6c757d)
+
+---
+
 <p align="center">
-  <img src="docs/images/scope-g7-logo.png" alt="Scope G7 Logo" width="180" style="border-radius: 20px;"/>
+  <img src="docs/images/scope-g7-logo.png" alt="Scope G7 Logo" width="200">
 </p>
 
-<h1 align="center">🚀 Scope Your Project – Gruppe 7</h1>
+---
 
-<h3 align="center">💡 Releases & Change Management</h3>
+## 🎯 Willkommen
 
-<p align="center">
-  Dieses Repository gehört zur <strong>Gruppe 7</strong> des Moduls <em>Scope Your Project (HSLU)</em>.<br>
-  Ziel ist es, den vollständigen Lebenszyklus von Software-Releases – von der Versionierung bis zum Deployment –<br>
-  praxisnah zu verstehen, zu planen und zu dokumentieren.
-</p>
+Willkommen zum Repository der **Gruppe 7** des Moduls *Scope Your Project (HSLU)*.  
+Dieses Projekt behandelt **Releases & Change Management** – also den gesamten Lebenszyklus von Software-Releases:  
+Versionierung, Change Control (CHANGELOG/Release Notes), sowie Deployment-Strategien (Phased, Feature Flags, Rollback).
+
 
 ---
 
