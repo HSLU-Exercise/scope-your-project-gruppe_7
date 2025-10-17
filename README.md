@@ -1,10 +1,8 @@
 # 🚀 Scope Your Project – Gruppe 7
 
-[![GitHub Pages](https://img.shields.io/badge/docs-online-blue)](https://hslu-exercise.github.io/scope-your-project-gruppe_7)
-![build](https://img.shields.io/badge/build-passing-28a745)
-![license](https://img.shields.io/badge/license-HSLU-6c757d)
-
-
+[![Docs online](https://img.shields.io/badge/docs-online-blue)](https://hslu-exercise.github.io/scope-your-project-gruppe_7/)
+[![Build](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/actions/workflows/release-on-tag.yml/badge.svg)](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/actions/workflows/release-on-tag.yml)
+![License](https://img.shields.io/badge/license-HSLU-6c757d)
 
 ---
 
