@@ -1,9 +1,10 @@
 # 🚀 Scope Your Project – Gruppe 7
 
+[![GitHub Pages](https://img.shields.io/badge/docs-online-blue)](https://hslu-exercise.github.io/scope-your-project-gruppe-7/)
 ![docs](https://img.shields.io/badge/docs-ready-444) 
-![online](https://img.shields.io/badge/online-yes-1a73e8)
 ![build](https://img.shields.io/badge/build-passing-28a745)
 ![license](https://img.shields.io/badge/license-HSLU-6c757d)
+
 
 
 ---
