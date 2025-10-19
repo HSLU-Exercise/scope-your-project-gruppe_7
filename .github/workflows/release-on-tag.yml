@@ -1,54 +1,47 @@
-name: Release (from CHANGELOG)
+name: Update Release notes from CHANGELOG
 
 on:
-  push:
-    tags:
-      - 'v*'
-      - '[0-9]+.[0-9]+.[0-9]+'
+  release:
+    types: [published]   # läuft NACHDEM release-please das Release erstellt
+
+permissions:
+  contents: write
 
 jobs:
-  release:
+  update-release-notes:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Extract version and changelog section
+      - name: Extract section for this version from CHANGELOG.md
         id: extract
         shell: bash
         run: |
           set -euo pipefail
-          TAG_NAME="${GITHUB_REF_NAME}"
-          VERSION="${TAG_NAME#v}"
-
-          awk -v ver="## \\["VERSION"\\]" '
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          VERSION="${TAG_NAME#v}"   # v1.2.3 -> 1.2.3
+          # Schneide den Abschnitt "## 1.2.3" bis vor den nächsten "## ..." aus
+          awk -v ver="^##[[:space:]]*${VERSION}[[:space:]]*\\(" '
             BEGIN{p=0}
-            $0 ~ "^" ver {p=1; print; next}
-            /^##\s*\[?[0-9]+\.[0-9]+\.[0-9]+\]?/ && p==1 {exit}
+            $0 ~ ver {p=1; print; next}
+            /^##[[:space:]]*[0-9]+\.[0-9]+\.[0-9]+[[:space:]]*\(/ && p==1 {exit}
             p==1 {print}
           ' CHANGELOG.md > RELEASE_BODY.md || true
 
           if [ ! -s RELEASE_BODY.md ]; then
-            awk -v ver="## "VERSION" " '
-              BEGIN{p=0}
-              $0 ~ "^" ver {p=1; print; next}
-              /^##\s*\[?[0-9]+\.[0-9]+\.[0-9]+\]?/ && p==1 {exit}
-              p==1 {print}
-            ' CHANGELOG.md > RELEASE_BODY.md || true
+            echo "WARN: Keine Release-Notes für ${VERSION} im CHANGELOG gefunden."
+            printf "## %s\n\n(No details found in CHANGELOG.)\n" "${VERSION}" > RELEASE_BODY.md
           fi
 
-          echo "----- RELEASE BODY -----"
-          cat RELEASE_BODY.md || true
-          echo "------------------------"
-
-      - name: Create GitHub Release
+      - name: Update GitHub Release body
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
-          name: ${{ github.ref_name }}
+          tag_name: ${{ github.event.release.tag_name }}
           body_path: RELEASE_BODY.md
-          draft: false
-          prerelease: false
+          # erlaubt Update eines vorhandenen Releases (wichtig!)
+          allowUpdates: true
+          append_body: false
+
