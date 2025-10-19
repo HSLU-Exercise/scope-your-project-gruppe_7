@@ -5,6 +5,14 @@ und folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ---
 
+## 1.0.0 (2025-10-19)
+
+
+### Bug Fixes
+
+* Refine require-changelog workflow conditions ([9c1e53d](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/9c1e53d10b798bf8667e39e683a2439015780cf3))
+* rename logo file to match README path ([0ba9d34](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/0ba9d340bab25c1ebbdd6944de7d766b67addc03))
+
 ## [Unreleased]
 ### ✨ Added
 - Neue Features oder Funktionen
@@ -45,4 +53,3 @@ und folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 [Unreleased]: https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v1.0.0...HEAD  
 [1.0.0]: https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/releases/tag/v1.0.0
-
