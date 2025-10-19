@@ -125,7 +125,7 @@ scope-your-project-gruppe_7/
 ## 🧮 Technologien
 
 - **Git & GitHub Actions** – CI/CD und automatisierte Releases  
-- **MkDocs** – Projektdokumentation (Deploy auf Pages)  
+- **Release Please** – Automatisierte Versionierung und Changelog-Generierung  
 - **Markdown** – Strukturierte Doku und Wiki-Texte  
 - **Python / Node.js** – Simulation von Release-Automatisierungen  
 
