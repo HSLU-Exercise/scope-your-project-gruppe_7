@@ -5,6 +5,13 @@ und folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ---
 
+## [1.0.1](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v1.0.0...v1.0.1) (2025-10-19)
+
+
+### Bug Fixes
+
+* GitHub Actions workflow for release notes ([4fac8c7](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/4fac8c7e44864191f25b0bbaa0d83015af450a37))
+
 ## 1.0.0 (2025-10-19)
 
 
