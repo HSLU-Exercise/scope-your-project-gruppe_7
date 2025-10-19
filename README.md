@@ -78,16 +78,15 @@ python app.py
 ```
 
 ---
-
 ## 🧱 Projektstruktur
 ```bash
 scope-your-project-gruppe_7/
-├── .github/              # CI/CD Workflows
-├── docs/                 # MkDocs / Dokumentation
-├── CHANGELOG.md          # Änderungsverlauf
-├── mkdocs.yml            # MkDocs-Konfiguration
-├── README.md             # Diese Datei
-└── src/                  # (optional) Beispielcode oder Simulation
+├── .github/                      # CI/CD Workflows (GitHub Actions)
+├── docs/                         # (optional) Projektdokumentation oder Demo-Seiten
+├── CHANGELOG.md                  # Automatisch generierter Änderungsverlauf
+├── release-please-config.json    # Konfiguration für Release-Please
+├── .release-please-manifest.json # Manifest für Versionsverwaltung
+├── README.md                     # Projektübersicht und Beschreibung
 ```
 
 ---
