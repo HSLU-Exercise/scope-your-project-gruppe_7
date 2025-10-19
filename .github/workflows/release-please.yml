@@ -12,10 +12,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Run release-please
-        uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         with:
           release-type: simple
-          package-name: "scope-your-project-gruppe7"
-          manifest-file: ".release-please-manifest.json"
-          config-file: "release-please-config.json"
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          fork: true
