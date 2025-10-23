@@ -149,5 +149,5 @@ Siehe [CHANGELOG.md](./CHANGELOG.md)
 ## ⚖️ Lizenz
 
 © 2025 HSLU – Scope Your Project (Gruppe 7)  
-Dieses Projekt dient ausschließlich zu Lern- und Demonstrationszwecken.
+Dieses Projekt dient ausschliesslich zu Lern- und Demonstrationszwecken.
 
