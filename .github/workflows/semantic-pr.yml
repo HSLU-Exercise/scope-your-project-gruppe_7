@@ -1,5 +1,4 @@
 name: semantic-pr
-onname: semantic-pr
 
 on:
   pull_request:
@@ -32,3 +31,4 @@ jobs:
           ignoreLabels: |
             autorelease: pending
             skip-semantic-check
+
