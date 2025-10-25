@@ -6,6 +6,17 @@ und folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ---
 
+## [2.0.0](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v1.0.3...v2.0.0) (2025-10-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* Initial release
+
+### Features
+
+* Initial release ([e77bdde](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/e77bdde17b4c4d44c413bbb9be5190a1b2cbc070))
+
 ## [1.0.3](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v1.0.2...v1.0.3) (2025-10-25)
 
 
