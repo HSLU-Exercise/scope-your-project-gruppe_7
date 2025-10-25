@@ -6,6 +6,13 @@ und folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ---
 
+## [2.1.0](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v2.0.1...v2.1.0) (2025-10-25)
+
+
+### Features
+
+* Feature Flag Dark Mode ([db9e4e3](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/db9e4e35913800508dc08fed90fd8cf9a4c186da))
+
 ## [2.0.1](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v2.0.0...v2.0.1) (2025-10-25)
 
 
