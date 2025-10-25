@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Coffee & Chill – Dein Nachbarschafts-Cafe mit hausgemachtem Gebäck und gutem Kaffee.">
-    <meta name="application-version" content="2.1.0">
+    <meta name="application-version" content="2.2.0">
     <title>Coffee & Chill – Nachbarschafts-Cafe</title>
     <style>
       :root {
@@ -16,9 +16,11 @@
         --line: #e0e0e0;
         --shadow: 0 4px 20px rgba(0, 0, 0, .1);
         --radius: 16px;
+        --promo-bg: #ffe08a;
+        --promo-ink: #222;
+        /* gut sichtbares Gelb */
       }
 
-      /* Dark-Theme Variablen */
       :root[data-theme="dark"] {
         --bg: #0f1115;
         --panel: #141821;
@@ -26,6 +28,9 @@
         --muted: #9aa3af;
         --line: #262c3a;
         --shadow: 0 8px 24px rgba(0, 0, 0, .35);
+        --promo-bg: #4b3a00;
+        --promo-ink: #ffe08a;
+        /* kontrastreich im Dark Mode */
       }
 
       * {
@@ -37,7 +42,7 @@
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
         background: var(--bg);
         color: var(--ink);
-        line-height: 1.6;
+        line-height: 1.6
       }
 
       .wrap {
@@ -89,7 +94,51 @@
       }
 
       nav a:hover {
-        background: color-mix(in srgb, var(--panel) 85%, var(--ink) 15%)
+        background: #efefef
+      }
+
+      /* PROMO-BANNER: auffällig, direkt unter dem Header */
+      .promo-wrap {
+        margin-top: 12px
+      }
+
+      #promo-banner {
+        display: none;
+        /* wird per JS auf block gesetzt */
+        background: var(--promo-bg);
+        color: var(--promo-ink);
+        border: 2px solid #d4b24f;
+        border-radius: 12px;
+        padding: 14px 16px;
+        font-weight: 700;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+      }
+
+      #promo-banner .row {
+        display: flex;
+        align-items: center;
+        gap: 12px
+      }
+
+      #promo-banner .msg {
+        flex: 1;
+        font-size: 18px
+      }
+
+      #promo-banner .close {
+        border: none;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        font-size: 20px;
+        line-height: 1;
+      }
+
+      #promo-banner .sub {
+        font-weight: 500;
+        font-size: 13px;
+        opacity: .9;
+        margin-top: 4px
       }
 
       .hero {
@@ -127,7 +176,7 @@
       }
 
       .lede {
-        color: color-mix(in srgb, var(--ink) 70%, #666 30%)
+        color: #444
       }
 
       .grid {
@@ -157,7 +206,7 @@
 
       .card p {
         margin: 0;
-        color: color-mix(in srgb, var(--ink) 70%, #666 30%)
+        color: #444
       }
 
       .list {
@@ -177,13 +226,13 @@
         border-bottom: none
       }
 
-      /* Footer + Kippschalter */
       footer {
         margin-top: 30px;
         display: flex;
         align-items: center;
         gap: 12px;
-        color: var(--muted)
+        color: var(--muted);
+        flex-wrap: wrap
       }
 
       .footer-spacer {
@@ -208,7 +257,7 @@
         background: #ccc;
         border-radius: 12px;
         cursor: pointer;
-        transition: background .3s;
+        transition: background .3s
       }
 
       .toggle::after {
@@ -221,15 +270,29 @@
         border-radius: 50%;
         background: #fff;
         transition: transform .3s;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .2)
       }
 
       .toggle.active {
-        background: var(--accent);
+        background: var(--accent)
       }
 
       .toggle.active::after {
-        transform: translateX(24px);
+        transform: translateX(24px)
+      }
+
+      .demo-btn {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--ink);
+        cursor: pointer;
+        font-size: 13px;
+        padding: 4px 8px;
+        border-radius: 8px
+      }
+
+      .demo-btn:hover {
+        background: #efefef
       }
     </style>
   </head>
@@ -245,6 +308,16 @@
         </div>
         <nav><a href="#menu">Menu</a><a href="#zeiten">Zeiten</a><a href="#kontakt">Kontakt</a></nav>
       </header>
+      <!-- NEU: Promo-Banner (phased) -->
+      <div class="promo-wrap">
+        <div id="promo-banner" role="region" aria-live="polite" aria-label="Aktion">
+          <div class="row">
+            <div class="msg">📣 <span style="text-decoration:underline">NEU</span>: Haferdrink ohne Aufpreis – nur für kurze Zeit! </div>
+            <button class="close" id="promo-close" aria-label="Banner schließen">×</button>
+          </div>
+          <div class="sub" id="promo-diag">Diagnose lädt …</div>
+        </div>
+      </div>
       <section class="hero">
         <div class="panel">
           <div class="eyebrow">Willkommen</div>
@@ -255,9 +328,18 @@
           <div class="eyebrow">Heute</div>
           <h3 style="margin:8px 0">Empfehlungen</h3>
           <ul class="list">
-            <li><span>Flat White</span><span>4.80</span></li>
-            <li><span>Zimt-Schnecke</span><span>3.20</span></li>
-            <li><span>Filterkaffee</span><span>3.50</span></li>
+            <li>
+              <span>Flat White</span>
+              <span>4.80</span>
+            </li>
+            <li>
+              <span>Zimt-Schnecke</span>
+              <span>3.20</span>
+            </li>
+            <li>
+              <span>Filterkaffee</span>
+              <span>3.50</span>
+            </li>
           </ul>
           <p class="muted" style="margin-top:8px">Preise in CHF. Solange Vorrat reicht.</p>
         </aside>
@@ -266,31 +348,63 @@
         <div class="card">
           <h3>Kaffee & Heissgetränke</h3>
           <ul class="list">
-            <li><span>Espresso</span><span>3.20</span></li>
-            <li><span>Cappuccino</span><span>4.50</span></li>
-            <li><span>Latte</span><span>4.80</span></li>
-            <li><span>Heisse Schokolade</span><span>4.20</span></li>
+            <li>
+              <span>Espresso</span>
+              <span>3.20</span>
+            </li>
+            <li>
+              <span>Cappuccino</span>
+              <span>4.50</span>
+            </li>
+            <li>
+              <span>Latte</span>
+              <span>4.80</span>
+            </li>
+            <li>
+              <span>Heisse Schokolade</span>
+              <span>4.20</span>
+            </li>
           </ul>
         </div>
         <div class="card">
           <h3>Gebäck</h3>
           <ul class="list">
-            <li><span>Butter-Gipfeli</span><span>2.20</span></li>
-            <li><span>Banana Bread</span><span>3.80</span></li>
-            <li><span>Brownie</span><span>3.50</span></li>
-            <li><span>Granola Becher</span><span>4.20</span></li>
+            <li>
+              <span>Butter-Gipfeli</span>
+              <span>2.20</span>
+            </li>
+            <li>
+              <span>Banana Bread</span>
+              <span>3.80</span>
+            </li>
+            <li>
+              <span>Brownie</span>
+              <span>3.50</span>
+            </li>
+            <li>
+              <span>Granola Becher</span>
+              <span>4.20</span>
+            </li>
           </ul>
         </div>
         <div class="card">
           <h3>Kaltes</h3>
           <ul class="list">
-            <li><span>Eistee Hausgemacht</span><span>3.90</span></li>
-            <li><span>Limonade</span><span>3.50</span></li>
-            <li><span>Wasser still/sprudel</span><span>2.50</span></li>
+            <li>
+              <span>Eistee Hausgemacht</span>
+              <span>3.90</span>
+            </li>
+            <li>
+              <span>Limonade</span>
+              <span>3.50</span>
+            </li>
+            <li>
+              <span>Wasser still/sprudel</span>
+              <span>2.50</span>
+            </li>
           </ul>
         </div>
       </section>
-      <!-- Wieder drin: Öffnungszeiten / Adresse / Kontakt -->
       <section id="zeiten" class="grid" style="margin-top:14px">
         <div class="card">
           <h3>Öffnungszeiten</h3>
@@ -323,18 +437,21 @@
       <footer>
         <div>© <span id="year"></span> Coffee & Chill </div>
         <div class="footer-spacer"></div>
-        <!-- Feature Flag: Dark Mode -->
+        <!-- Dark Mode Feature Flag -->
         <div class="ff-label">
           <div>Feature: Dark Mode</div>
-          <div id="toggle" class="toggle"></div>
+          <div id="toggle" class="toggle" role="switch" aria-label="Dark Mode umschalten" tabindex="0"></div>
         </div>
-        <div class="muted">v2.1.0</div>
+        <!-- Demo-Buttons für die Präsentation -->
+        <button id="btn-show" class="demo-btn">Banner zeigen</button>
+        <button id="btn-hide" class="demo-btn">Banner verbergen</button>
+        <div class="muted">v2.2.0</div>
       </footer>
     </div>
     <script>
-      // Jahreszahl
+      // Jahr in Footer
       document.getElementById('year').textContent = new Date().getFullYear();
-      // Feature Flag: Dark Mode (persistiert)
+      // Dark Mode Feature Flag (persistiert)
       (function() {
         const KEY = 'ff_dark_enabled';
         const toggle = document.getElementById('toggle');
@@ -343,13 +460,64 @@
         function apply(on) {
           root.setAttribute('data-theme', on ? 'dark' : '');
           toggle.classList.toggle('active', on);
+          toggle.setAttribute('aria-checked', on ? 'true' : 'false');
         }
         let on = localStorage.getItem(KEY) === '1';
         apply(on);
-        toggle.addEventListener('click', () => {
+        const toggleAction = () => {
           on = !on;
           localStorage.setItem(KEY, on ? '1' : '0');
           apply(on);
+        };
+        toggle.addEventListener('click', toggleAction);
+        toggle.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleAction();
+          }
+        });
+      })();
+      // Phased Deployment: Promo-Banner (random 30%) + Schließen (session-basiert)
+      (function() {
+        const banner = document.getElementById('promo-banner');
+        const diag = document.getElementById('promo-diag');
+        const btnClose = document.getElementById('promo-close');
+        const btnShow = document.getElementById('btn-show');
+        const btnHide = document.getElementById('btn-hide');
+        if (!banner) return;
+        const KEY_DISMISS = 'promo_dismiss_session'; // sessionStorage (nur aktuelle Sitzung)
+        const dismissed = sessionStorage.getItem(KEY_DISMISS) === '1';
+
+        function setVisible(v) {
+          banner.style.display = v ? 'block' : 'none';
+        }
+        // Zufallsentscheidung (nur, wenn nicht dismissed)
+        let visible = false;
+        let rand = Math.random() * 100; // 0..99.999
+        if (!dismissed) {
+          visible = rand < 30; // 30 %
+        }
+        setVisible(visible);
+        if (diag) {
+          diag.textContent = dismissed ? 'Status: vom Nutzer in dieser Sitzung geschlossen' : `Rollout 30% | Random=${rand.toFixed(1)} → ${visible ? 'SICHTBAR' : 'VERBORGEN'}`;
+        }
+        console.log('[promo] 30% rollout | rand=%s -> visible=%s | dismissed=%s', rand.toFixed(1), visible, dismissed);
+        // Schließen-Button (nur Sitzung)
+        if (btnClose) {
+          btnClose.addEventListener('click', () => {
+            sessionStorage.setItem(KEY_DISMISS, '1');
+            setVisible(false);
+            if (diag) diag.textContent = 'Status: vom Nutzer in dieser Sitzung geschlossen';
+          });
+        }
+        // Demo-Buttons (immer überschreiben)
+        if (btnShow) btnShow.addEventListener('click', () => {
+          setVisible(true);
+          if (diag) diag.textContent = 'Demo: Banner manuell eingeblendet';
+        });
+        if (btnHide) btnHide.addEventListener('click', () => {
+          setVisible(false);
+          if (diag) diag.textContent = 'Demo: Banner manuell verborgen';
         });
       })();
     </script>
