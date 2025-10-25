@@ -4,354 +4,459 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Coffee & Chill – Dein Nachbarschafts-Cafe mit hausgemachtem Gebäck und gutem Kaffee.">
-    <meta name="application-version" content="2.1.0">
+    <meta name="application-version" content="3.0.0">
     <title>Coffee & Chill – Nachbarschafts-Cafe</title>
     <style>
       :root {
-        --bg: #f8f8f8;
-        --panel: #ffffff;
-        --ink: #1a1a1a;
-        --muted: #555;
-        --accent: #8b5cf6;
-        --line: #e0e0e0;
-        --shadow: 0 4px 20px rgba(0, 0, 0, .1);
-        --radius: 16px;
+        --bg: #f6efe7;
+        --panel: #fffaf5;
+        --ink: #2b2018;
+        --muted: #8a7665;
+        --line: #e7d8c9;
+        --accent: #b9885e;
+        --radius: 18px;
+        --shadow: 0 10px 24px rgba(43, 32, 24, .1);
+        --shadow-strong: 0 20px 40px rgba(43, 32, 24, .18);
+        --promo-bg: #ffe19d;
+        --promo-ink: #2b2018;
       }
 
-      /* Dark-Theme Variablen */
       :root[data-theme="dark"] {
-        --bg: #0f1115;
-        --panel: #141821;
-        --ink: #e8eaf2;
-        --muted: #9aa3af;
-        --line: #262c3a;
-        --shadow: 0 8px 24px rgba(0, 0, 0, .35);
+        --bg: #17100b;
+        --panel: #1f160f;
+        --ink: #f2eae2;
+        --muted: #b7a293;
+        --line: #34251a;
+        --accent: #d2a77e;
+        --shadow: 0 10px 24px rgba(0, 0, 0, .35);
+        --shadow-strong: 0 24px 50px rgba(0, 0, 0, .55);
+        --promo-bg: #3a2a1f;
+        --promo-ink: #ffdcae;
       }
 
       * {
         box-sizing: border-box
       }
 
+      html,
       body {
-        margin: 0;
+        margin: 0
+      }
+
+      body {
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-        background: var(--bg);
         color: var(--ink);
+        background: var(--bg);
         line-height: 1.6;
       }
 
       .wrap {
-        max-width: 1100px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 24px 16px 64px
+        padding: 18px 18px 80px
       }
 
-      header {
+      header.hdr {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: color-mix(in srgb, var(--bg) 70%, transparent);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+        transition: box-shadow .25s ease
+      }
+
+      header.hdr.scrolled {
+        box-shadow: var(--shadow-strong)
+      }
+
+      .hdr-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 12px 18px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
-        padding: 12px 18px;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: var(--panel);
-        box-shadow: var(--shadow)
+        gap: 16px
       }
 
       .brand {
         display: flex;
         align-items: center;
-        gap: 12px
+        gap: 14px
       }
 
       .logo {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
         background: var(--panel);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        box-shadow: var(--shadow)
-      }
-
-      h1 {
-        font-size: clamp(20px, 3vw, 28px);
-        margin: 0
-      }
-
-      nav a {
-        color: var(--ink);
-        text-decoration: none;
-        padding: 8px 10px;
-        border-radius: 10px
-      }
-
-      nav a:hover {
-        background: color-mix(in srgb, var(--panel) 85%, var(--ink) 15%)
-      }
-
-      .hero {
         display: grid;
-        gap: 20px;
-        grid-template-columns: 1fr;
-        margin: 28px 0
+        place-items: center;
+        font-size: 22px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line)
       }
 
-      @media(min-width:900px) {
-        .hero {
-          grid-template-columns: 1.1fr .9fr
-        }
+      .title {
+        margin: 0;
+        font-weight: 800;
+        font-size: clamp(18px, 2.4vw, 24px)
       }
 
-      .panel {
-        border: 1px solid var(--line);
-        background: var(--panel);
-        border-radius: var(--radius);
-        padding: 24px;
-        box-shadow: var(--shadow)
-      }
-
-      .eyebrow {
-        letter-spacing: .12em;
-        text-transform: uppercase;
+      .subtitle {
+        margin-top: 2px;
         color: var(--muted);
         font-size: 13px
       }
 
-      .title {
-        font-size: clamp(26px, 5vw, 42px);
-        line-height: 1.15;
-        margin: 8px 0 10px
+      nav {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap
       }
 
-      .lede {
-        color: color-mix(in srgb, var(--ink) 70%, #666 30%)
+      .chip {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        text-decoration: none;
+        color: var(--ink);
+        font-weight: 600;
+        font-size: 14px
       }
 
-      .grid {
+      .chip:hover {
+        box-shadow: var(--shadow)
+      }
+
+      .theme {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 8px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        box-shadow: var(--shadow)
+      }
+
+      .toggle {
+        --w: 56px;
+        --h: 28px;
+        position: relative;
+        width: var(--w);
+        height: var(--h);
+        background: #cbb6a2;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background .25s ease;
+        border: 1px solid var(--line)
+      }
+
+      .thumb {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: calc(var(--h) - 4px);
+        height: calc(var(--h) - 4px);
+        border-radius: 50%;
+        background: #fff;
         display: grid;
-        gap: 18px;
-        grid-template-columns: 1fr
+        place-items: center;
+        font-size: 14px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+        transition: transform .25s ease
       }
 
-      @media(min-width:900px) {
-        .grid {
-          grid-template-columns: repeat(3, 1fr)
+      .toggle.active {
+        background: var(--accent)
+      }
+
+      .toggle.active .thumb {
+        transform: translateX(calc(var(--w) - var(--h)))
+      }
+
+      /* Hero jetzt einspaltig, volle Breite */
+      .hero {
+        margin: 40px 0
+      }
+
+      .hero .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-strong);
+        padding: clamp(30px, 6vw, 60px);
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+        animation: fadeIn 1s ease both;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px)
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0)
+        }
+      }
+
+      .kicker {
+        text-transform: uppercase;
+        color: var(--muted);
+        font-size: 13px;
+        letter-spacing: .16em;
+        margin-bottom: 6px
+      }
+
+      h2 {
+        font-size: clamp(32px, 5.2vw, 54px);
+        margin: 8px 0 10px;
+        font-weight: 800
+      }
+
+      .lead {
+        color: color-mix(in srgb, var(--ink) 72%, #666 28%);
+        max-width: 600px;
+        margin: 0 auto
+      }
+
+      .section-title {
+        font-size: clamp(18px, 2.2vw, 22px);
+        margin: 36px 0 10px;
+        text-align: center
+      }
+
+      .features {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      @media(max-width:900px) {
+        .features {
+          grid-template-columns: 1fr
         }
       }
 
       .card {
-        border: 1px solid var(--line);
         background: var(--panel);
+        border: 1px solid var(--line);
         border-radius: var(--radius);
         padding: 18px;
-        box-shadow: var(--shadow)
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity .6s, transform .6s
       }
 
-      .card h3 {
-        margin: 0 0 6px;
-        font-size: 18px
+      .card.show {
+        opacity: 1;
+        transform: translateY(0)
       }
 
-      .card p {
-        margin: 0;
-        color: color-mix(in srgb, var(--ink) 70%, #666 30%)
+      .info {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, 1fr)
       }
 
-      .list {
-        margin: 10px 0 0;
-        padding: 0;
-        list-style: none
+      @media(max-width:900px) {
+        .info {
+          grid-template-columns: 1fr
+        }
       }
 
-      .list li {
+      .info .card {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      .info .card.show {
+        opacity: 1;
+        transform: translateY(0)
+      }
+
+      #promo {
+        display: none;
+        margin: 14px 0 0;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: var(--promo-bg);
+        color: var(--promo-ink);
+        border: 1px solid color-mix(in srgb, var(--promo-bg) 60%, #000 40%);
+        box-shadow: var(--shadow);
+        font-weight: 700;
+        text-align: center
+      }
+
+      footer {
+        margin-top: 36px;
         display: flex;
         justify-content: space-between;
-        padding: 8px 0;
-        border-bottom: 1px dashed var(--line)
-      }
-
-      .list li:last-child {
-        border-bottom: none
-      }
-
-      /* Footer + Kippschalter */
-      footer {
-        margin-top: 30px;
-        display: flex;
         align-items: center;
-        gap: 12px;
         color: var(--muted)
-      }
-
-      .footer-spacer {
-        flex: 1
-      }
-
-      .muted {
-        color: var(--muted)
-      }
-
-      .ff-label {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        user-select: none
-      }
-
-      .toggle {
-        position: relative;
-        width: 48px;
-        height: 24px;
-        background: #ccc;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: background .3s;
-      }
-
-      .toggle::after {
-        content: '';
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #fff;
-        transition: transform .3s;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
-      }
-
-      .toggle.active {
-        background: var(--accent);
-      }
-
-      .toggle.active::after {
-        transform: translateX(24px);
       }
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <header>
+    <header class="hdr" id="hdr">
+      <div class="hdr-inner">
         <div class="brand">
           <div class="logo" aria-hidden="true">☕</div>
           <div>
-            <h1>Coffee & Chill</h1>
-            <div class="muted">Nachbarschafts-Cafe in deiner Stadt</div>
+            <h1 class="title">Coffee & Chill</h1>
+            <div class="subtitle">Nachbarschafts-Cafe in deiner Stadt</div>
           </div>
         </div>
-        <nav><a href="#menu">Menu</a><a href="#zeiten">Zeiten</a><a href="#kontakt">Kontakt</a></nav>
-      </header>
+        <nav><a class="chip" href="#menu">Menü</a><a class="chip" href="#zeiten">Zeiten</a><a class="chip" href="#kontakt">Kontakt</a>
+          <div class="theme" title="Design umschalten"><span aria-hidden="true">🌞</span>
+            <div id="theme-toggle" class="toggle" role="switch" tabindex="0">
+              <div class="thumb">☕</div>
+            </div><span aria-hidden="true">🌙</span>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap">
+      <div id="promo">📣 Neu: Haferdrink ohne Aufpreis – nur für kurze Zeit!</div>
+      <!-- Willkommensbox jetzt über volle Breite -->
       <section class="hero">
         <div class="panel">
-          <div class="eyebrow">Willkommen</div>
-          <h2 class="title">Guter Kaffee, hausgemachtes Gebäck, ruhige Atmosphäre.</h2>
-          <p class="lede">Ob kurzer Stopp auf dem Weg zur Arbeit oder gemütliche Pause am Nachmittag – bei uns findest du einfache Klassiker und freundlichen Service.</p>
+          <div class="kicker">Willkommen</div>
+          <h2>Einfach guter Kaffee. Frisches Gebäck. Ruhige Atmosphäre.</h2>
+          <p class="lead">Ob kurzer Stopp auf dem Weg zur Arbeit oder gemütliche Pause am Nachmittag – bei uns erwarten dich klassische Getränke, kleine Snacks und freundlicher Service.</p>
         </div>
-        <aside class="panel">
-          <div class="eyebrow">Heute</div>
-          <h3 style="margin:8px 0">Empfehlungen</h3>
-          <ul class="list">
-            <li><span>Flat White</span><span>4.80</span></li>
-            <li><span>Zimt-Schnecke</span><span>3.20</span></li>
-            <li><span>Filterkaffee</span><span>3.50</span></li>
-          </ul>
-          <p class="muted" style="margin-top:8px">Preise in CHF. Solange Vorrat reicht.</p>
-        </aside>
       </section>
-      <section id="menu" class="grid">
+      <h3 class="section-title">Unser Kaffee</h3>
+      <section class="features">
+        <article class="card">
+          <h3>Sorgfältig geröstet</h3>
+          <p>Unsere Bohnen kommen von kleinen Röstereien und werden frisch gemahlen.</p>
+        </article>
+        <article class="card">
+          <h3>Gebäck aus der Nachbarschaft</h3>
+          <p>Täglich frisch geliefert: Gipfeli, Banana Bread und Brownies.</p>
+        </article>
+        <article class="card">
+          <h3>Platz zum Durchatmen</h3>
+          <p>WLAN, ruhige Ecken und freundliche Atmosphäre für deine Pause.</p>
+        </article>
+      </section>
+      <h3 id="menu" class="section-title">Menü</h3>
+      <section class="features">
         <div class="card">
           <h3>Kaffee & Heissgetränke</h3>
-          <ul class="list">
-            <li><span>Espresso</span><span>3.20</span></li>
-            <li><span>Cappuccino</span><span>4.50</span></li>
-            <li><span>Latte</span><span>4.80</span></li>
-            <li><span>Heisse Schokolade</span><span>4.20</span></li>
+          <ul>
+            <li>Espresso – 3.20</li>
+            <li>Cappuccino – 4.50</li>
+            <li>Latte – 4.80</li>
+            <li>Heisse Schokolade – 4.20</li>
           </ul>
         </div>
         <div class="card">
           <h3>Gebäck</h3>
-          <ul class="list">
-            <li><span>Butter-Gipfeli</span><span>2.20</span></li>
-            <li><span>Banana Bread</span><span>3.80</span></li>
-            <li><span>Brownie</span><span>3.50</span></li>
-            <li><span>Granola Becher</span><span>4.20</span></li>
+          <ul>
+            <li>Butter-Gipfeli – 2.20</li>
+            <li>Banana Bread – 3.80</li>
+            <li>Brownie – 3.50</li>
+            <li>Granola Becher – 4.20</li>
           </ul>
         </div>
         <div class="card">
           <h3>Kaltes</h3>
-          <ul class="list">
-            <li><span>Eistee Hausgemacht</span><span>3.90</span></li>
-            <li><span>Limonade</span><span>3.50</span></li>
-            <li><span>Wasser still/sprudel</span><span>2.50</span></li>
+          <ul>
+            <li>Eistee hausgemacht – 3.90</li>
+            <li>Limonade – 3.50</li>
+            <li>Wasser still/sprudel – 2.50</li>
           </ul>
         </div>
       </section>
-      <!-- Wieder drin: Öffnungszeiten / Adresse / Kontakt -->
-      <section id="zeiten" class="grid" style="margin-top:14px">
+      <h3 class="section-title">Besuch & Kontakt</h3>
+      <section id="zeiten" class="info">
         <div class="card">
           <h3>Öffnungszeiten</h3>
-          <ul class="list">
-            <li>
-              <span>Mo–Fr</span>
-              <span>07:30 – 18:00</span>
-            </li>
-            <li>
-              <span>Sa</span>
-              <span>08:00 – 16:00</span>
-            </li>
-            <li>
-              <span>So</span>
-              <span>geschlossen</span>
-            </li>
-          </ul>
+          <p>Mo–Fr 07:30–18:00 <br>Sa 08:00–16:00 <br>So geschlossen </p>
         </div>
         <div class="card">
           <h3>Adresse</h3>
           <p>Hauptstrasse 12 <br>8000 Zürich </p>
           <p class="muted">Tram und Bus in 2 Gehminuten.</p>
         </div>
-        <div id="kontakt" class="card">
+        <div class="card">
           <h3>Kontakt</h3>
           <p>E-Mail: hallo@coffeeandchill.example <br>Telefon: 044 000 00 00 </p>
-          <p class="muted">Vorbestellungen gerne telefonisch.</p>
         </div>
       </section>
-      <footer>
-        <div>© <span id="year"></span> Coffee & Chill </div>
-        <div class="footer-spacer"></div>
-        <!-- Feature Flag: Dark Mode -->
-        <div class="ff-label">
-          <div>Feature: Dark Mode</div>
-          <div id="toggle" class="toggle"></div>
-        </div>
-        <div class="muted">v2.1.0</div>
-      </footer>
-    </div>
+    </main>
+    <footer class="wrap">
+      <div>© <span id="year"></span> Coffee & Chill </div>
+      <div class="muted">v3.0.0</div>
+    </footer>
     <script>
-      // Jahreszahl
       document.getElementById('year').textContent = new Date().getFullYear();
-      // Feature Flag: Dark Mode (persistiert)
+      // Theme toggle
       (function() {
-        const KEY = 'ff_dark_enabled';
-        const toggle = document.getElementById('toggle');
-        const root = document.documentElement;
+        const KEY = 'theme_pref_v2',
+          root = document.documentElement,
+          toggle = document.getElementById('theme-toggle');
 
-        function apply(on) {
-          root.setAttribute('data-theme', on ? 'dark' : '');
-          toggle.classList.toggle('active', on);
+        function apply(m) {
+          const d = m === 'dark';
+          root.setAttribute('data-theme', d ? 'dark' : '');
+          toggle.classList.toggle('active', d);
         }
-        let on = localStorage.getItem(KEY) === '1';
-        apply(on);
-        toggle.addEventListener('click', () => {
-          on = !on;
-          localStorage.setItem(KEY, on ? '1' : '0');
-          apply(on);
+        let pref = localStorage.getItem(KEY) || ((matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+        apply(pref);
+
+        function flip() {
+          pref = (pref === 'dark') ? 'light' : 'dark';
+          localStorage.setItem(KEY, pref);
+          apply(pref);
+        }
+        toggle.onclick = flip;
+        toggle.onkeydown = e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            flip();
+          }
+        };
+      })();
+      // Promo banner (0%)
+      (function() {
+        const b = document.getElementById('promo');
+        if (!b) return;
+        let show = (Math.random() * 100) < 0;
+        const p = new URLSearchParams(location.search);
+        if (p.get('promo') === '1') show = true;
+        if (p.get('promo') === '0') show = false;
+        b.style.display = show ? 'block' : 'none';
+      })();
+      // Scroll animations
+      (function() {
+        const hdr = document.getElementById('hdr');
+        window.addEventListener('scroll', () => {
+          hdr.classList.toggle('scrolled', window.scrollY > 8)
+        }, {
+          passive: true
         });
+        const obs = new IntersectionObserver(es => es.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('show');
+            obs.unobserve(e.target);
+          }
+        }), {
+          threshold: 0.1
+        });
+        document.querySelectorAll('.card').forEach(c => obs.observe(c));
       })();
     </script>
-  </body>undefined
+  </body>
 </html>
