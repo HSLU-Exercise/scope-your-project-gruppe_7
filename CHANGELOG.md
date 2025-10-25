@@ -6,13 +6,6 @@ und folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ---
 
-## [2.2.0](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v2.1.0...v2.2.0) (2025-10-25)
-
-
-### Features
-
-* Phased Deployment - Werbebanner ([8bfa92a](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/8bfa92aab989478e17288835b2157e36fea55a67))
-
 ## [2.1.0](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v2.0.1...v2.1.0) (2025-10-25)
 
 
