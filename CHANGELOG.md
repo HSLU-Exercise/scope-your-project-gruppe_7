@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v1.4.0...v1.4.1) (2025-10-25)
+
+
+### Bug Fixes
+
+* Fehler ([f517be9](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/f517be90d55c12d7bc2b23e5c8b0315587ee190d))
+
 ## [1.4.0](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v1.3.0...v1.4.0) (2025-10-25)
 
 
