@@ -1,386 +1,269 @@
-
 <!doctype html>
 <html lang="de">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Scope Your Project – Gruppe 7 · Release & Change Management</title>
-<meta name="description" content="Release & Change Management · Versioning, Changelog Automation, Deployment Strategien – Gruppe 7" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0b0f14; --card:#111823; --muted:#90a4b8; --text:#eaf2ff; --text-soft:#c9d7e6;
-    --brand:#7aa7ff; --brand-2:#6cf2d9; --accent:#ffd166; --ok:#8fe388; --warn:#ffd166; --danger:#ff7b7b;
-    --border:rgba(255,255,255,.08); --glow:rgba(122,167,255,.25);
-    --radius:18px; --shadow:0 20px 60px rgba(0,0,0,.40), 0 0 120px var(--glow);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    color:var(--text); background:radial-gradient(1200px 800px at 20% -10%, #132033 0%, transparent 60%),
-                      radial-gradient(1200px 800px at 120% 10%, #12253a 0%, transparent 60%),
-                      var(--bg);
-    line-height:1.6; letter-spacing:.01em;
-  }
-  a{color:inherit; text-decoration:none}
-  .wrap{max-width:1180px; margin:0 auto; padding:40px 20px 120px}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Coffe & Chill – Dein Nachbarschafts-Cafe mit hausgemachtem Gebäck und gutem Kaffee.">
+    <meta name="application-version" content="1.0.0">
+    <title>Coffe & Chill – Nachbarschafts-Cafe</title>
+    <style>
+      :root {
+        --bg: #f8f8f8;
+        --panel: #ffffff;
+        --ink: #1a1a1a;
+        --muted: #555;
+        --accent: #8b5cf6;
+        --line: #e0e0e0;
+        --shadow: 0 4px 20px rgba(0, 0, 0, .1);
+        --radius: 16px;
+      }
 
-  /* ========= HERO ========= */
-  .hero{
-    position:relative; border:1px solid var(--border); border-radius:24px; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-    padding:28px 28px 26px; box-shadow:var(--shadow); overflow:hidden;
-  }
-  .stars::before,.stars::after{
-    content:""; position:absolute; inset:-25%; background:
-      radial-gradient(2px 2px at 10% 20%,rgba(255,255,255,.35) 50%,transparent 52%) repeat,
-      radial-gradient(2px 2px at 60% 30%,rgba(255,255,255,.22) 50%,transparent 52%) repeat,
-      radial-gradient(1.5px 1.5px at 40% 80%,rgba(255,255,255,.18) 50%,transparent 52%) repeat;
-    background-size:160px 160px, 220px 220px, 180px 180px;
-    filter:blur(.3px);
-    animation:float 60s linear infinite;
-  }
-  .stars::after{animation-duration:100s; opacity:.6}
-  @keyframes float{to{transform:translateY(-600px)}}
+      * {
+        box-sizing: border-box
+      }
 
-  .badges{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px}
-  .badge{
-    font:600 12px/1 Inter; color:#08111f; background:#d5e4ff; border:1px solid rgba(255,255,255,.6);
-    padding:6px 10px; border-radius:999px; display:inline-flex; align-items:center; gap:8px;
-    box-shadow:0 6px 14px rgba(122,167,255,.25), inset 0 -1px 0 rgba(0,0,0,.12);
-  }
-  .badge.ok{background:#c9f7cf}
-  .badge.build{background:#dff1ff}
-  .badge.license{background:#ffeaa7}
-  .badge.hslu{background:#e8e7ff}
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.6
+      }
 
-  .hero h1{
-    margin:6px 0 8px; font-weight:800; font-size:clamp(28px,4.6vw,42px); letter-spacing:.01em;
-    text-shadow:0 1px 0 rgba(255,255,255,.05);
-  }
-  .subtitle{color:var(--text-soft); max-width:920px; margin-bottom:18px}
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px 16px 64px
+      }
 
-  .cta-row{display:flex; gap:12px; flex-wrap:wrap}
-  .btn{
-    --bgc:linear-gradient(180deg,#e9f1ff,#cfe0ff);
-    display:inline-flex; align-items:center; gap:10px; border-radius:12px; padding:12px 16px; font-weight:700; color:#0c1b2d;
-    border:1px solid rgba(255,255,255,.6); background:var(--bgc); box-shadow:0 12px 30px rgba(122,167,255,.25), inset 0 -1px 0 rgba(0,0,0,.1);
-    transform:translateZ(0); transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
-  }
-  .btn:hover{transform:translateY(-2px); filter:saturate(1.1)}
-  .btn.secondary{--bgc:linear-gradient(180deg,#e6fff8,#c8ffee)}
-  .btn.dark{--bgc:linear-gradient(180deg,#111a28,#0c1421); color:#e6f1ff; border-color:#24344a}
-  .btn svg{width:18px; height:18px}
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 18px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+        box-shadow: var(--shadow)
+      }
 
-  /* ========= GRID NAV ========= */
-  .section{margin-top:42px}
-  h2.section-title{font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 14px}
-  .grid{
-    display:grid; gap:14px; grid-template-columns:repeat(12,1fr);
-  }
-  .card{
-    grid-column:span 4; min-height:78px; padding:16px; border:1px solid var(--border); border-radius:16px;
-    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
-    display:flex; align-items:center; gap:14px; position:relative; overflow:hidden; transition:transform .18s ease, box-shadow .25s ease, border-color .2s ease;
-  }
-  .card:hover{transform:translateY(-3px); box-shadow:0 24px 70px rgba(0,0,0,.35), 0 0 60px var(--glow); border-color:rgba(122,167,255,.28)}
-  .card .icon{
-    width:34px; height:34px; border-radius:10px; display:grid; place-items:center; flex:0 0 auto;
-    background:radial-gradient(180px 180px at 30% 10%, rgba(255,255,255,.28), rgba(255,255,255,.05) 32%), linear-gradient(180deg,#1a2740,#10192a);
-    border:1px solid #2a3b57; box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 8px 22px rgba(0,0,0,.4);
-  }
-  .card .title{font-weight:700}
-  .card .desc{color:var(--text-soft); font-size:13px}
-  .card small{color:var(--muted)}
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px
+      }
 
-  /* ========= QUICKSTART ========= */
-  .code{
-    position:relative; background:#0d1523; border:1px solid #1e2a44; border-radius:16px; padding:16px; overflow:auto;
-  }
-  .code pre{margin:0; font:600 13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; color:#d9e8ff}
-  .copy{position:absolute; top:10px; right:10px; background:#142039; color:#eaf2ff; border:1px solid #27406f; padding:6px 10px; border-radius:10px; cursor:pointer}
-  .hint-row{display:flex; gap:18px; flex-wrap:wrap; margin-top:12px; color:var(--muted); font-size:13px}
-  .dot{width:9px; height:9px; border-radius:50%; display:inline-block; margin-right:8px; transform:translateY(1px)}
-  .dot.ok{background:var(--ok)} .dot.build{background:#91c9ff} .dot.deploy{background:#cda8ff}
+      .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        box-shadow: var(--shadow)
+      }
 
-  /* ========= ARCH DIAGRAM ========= */
-  .arch{
-    border:1px solid var(--border); border-radius:18px; padding:18px; background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
-  }
-  svg.arch-svg{width:100%; height:auto}
-  .node{filter:drop-shadow(0 8px 16px rgba(0,0,0,.35))}
-  .node rect{rx:14; ry:14; stroke:#243853; stroke-width:1.1}
-  .node.front rect{fill:#2a4bff33}
-  .node.api rect{fill:#14f1cb26}
-  .node.db rect{fill:#ffd1662b}
-  .node.ext rect{fill:#ff7b7b26}
-  .lbl{font:600 13px Inter; fill:#eaf2ff}
-  .pipe{stroke:#7aa7ffdd; stroke-width:2.2; fill:none; stroke-linecap:round; stroke-dasharray:6 10; animation:flow 3.6s linear infinite}
-  @keyframes flow{to{stroke-dashoffset:-180}}
+      h1 {
+        font-size: clamp(20px, 3vw, 28px);
+        margin: 0
+      }
 
-  /* ========= TEAM / TECH ========= */
-  .flex{display:flex; gap:14px; flex-wrap:wrap}
-  .pill{
-    border:1px solid var(--border); border-radius:14px; padding:10px 12px; background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
-    display:flex; gap:10px; align-items:center; transition:transform .18s ease, border-color .2s ease;
-  }
-  .pill:hover{transform:translateY(-2px); border-color:rgba(122,167,255,.28)}
-  .avatar{width:28px; height:28px; border-radius:50%; background:#23324a; display:grid; place-items:center; font-weight:800; color:#9ac1ff}
+      nav a {
+        color: var(--ink);
+        text-decoration: none;
+        padding: 8px 10px;
+        border-radius: 10px
+      }
 
-  /* ========= FOOTER ========= */
-  footer{margin-top:38px; color:var(--muted); font-size:13px}
-  .nav{display:flex; gap:12px; flex-wrap:wrap; margin-top:6px}
-  .link{padding:8px 12px; border:1px solid var(--border); border-radius:12px; background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01))}
-  .link:hover{border-color:rgba(122,167,255,.28)}
+      nav a:hover {
+        background: #f0f0f0
+      }
 
-  /* ========= RESPONSIVE ========= */
-  @media (max-width:980px){
-    .card{grid-column:span 6}
-  }
-  @media (max-width:620px){
-    .card{grid-column:span 12}
-    .cta-row{flex-direction:column}
-  }
-</style>
-</head>
-<body>
-  <div class="wrap">
+      .hero {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 1fr;
+        margin: 28px 0
+      }
 
-    <!-- HERO -->
-    <section class="hero stars">
-      <div class="badges">
-        <span class="badge build">docs</span>
-        <span class="badge build">online</span>
-        <span class="badge ok">build passing</span>
-        <span class="badge license">license</span>
-        <span class="badge hslu">HSLU</span>
-      </div>
+      @media(min-width:900px) {
+        .hero {
+          grid-template-columns: 1.1fr .9fr
+        }
+      }
 
-      <h1>Scope Your Project – <span style="color:var(--brand)">Gruppe 7</span></h1>
-      <div class="subtitle">
-        <strong>Release &amp; Change Management</strong> – Versionierung, Changelog-Automation, Tags &amp; Releases,
-        sowie Deployment-Strategien (Phased Rollout, Feature Flags &amp; Rollback). Alles sauber dokumentiert, CI/CD-getrieben
-        und visuell smooth ✨
-      </div>
+      .panel {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow)
+      }
 
-      <div class="cta-row">
-        <a class="btn" id="openDocs" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="#0c1b2d" stroke-width="1.5"/><path d="M14 3v6h6" stroke="#0c1b2d" stroke-width="1.5"/></svg>
-          Zur Doku
-        </a>
-        <a class="btn secondary" id="openWiki" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h5l2 7 2-7h5l-6 14-2-6-2 6L4 5z" stroke="#0c1b2d" stroke-width="1.6"/></svg>
-          Zum Wiki
-        </a>
-        <a class="btn dark" id="openRepo" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 18 4.77 5.07 5.07 0 0 0 17.91 1S16.73.65 14 2.48a13.38 13.38 0 0 0-5 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77 5.44 5.44 0 0 0 3.5 9.39c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 19v3" stroke="#e6f1ff" stroke-width="1.5"/></svg>
-          Repository
-        </a>
-      </div>
-    </section>
+      .eyebrow {
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-size: 13px
+      }
 
-    <!-- DOCS NAV -->
-    <section class="section">
-      <h2 class="section-title">Docs Navigator</h2>
-      <div class="grid">
-        <a class="card" id="navGetting" href="#" target="_blank" rel="noopener">
-          <div class="icon">⚡</div>
+      .title {
+        font-size: clamp(26px, 5vw, 42px);
+        line-height: 1.15;
+        margin: 8px 0 10px
+      }
+
+      .lede {
+        color: #444
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: 1fr
+      }
+
+      @media(min-width:900px) {
+        .grid {
+          grid-template-columns: repeat(3, 1fr)
+        }
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: var(--shadow)
+      }
+
+      .card h3 {
+        margin: 0 0 6px;
+        font-size: 18px
+      }
+
+      .card p {
+        margin: 0;
+        color: #444
+      }
+
+      .list {
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none
+      }
+
+      .list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px dashed var(--line)
+      }
+
+      .list li:last-child {
+        border-bottom: none
+      }
+
+      footer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted)
+      }
+
+      .muted {
+        color: var(--muted)
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <div class="logo" aria-hidden="true">☕</div>
           <div>
-            <div class="title">Getting Started</div>
-            <div class="desc">Onboarding, Voraussetzungen &amp; Klonen</div>
+            <h1>Coffe & Chill</h1>
+            <div class="muted">Nachbarschafts-Cafe in deiner Stadt</div>
           </div>
-        </a>
-        <a class="card" id="navArch" href="#" target="_blank" rel="noopener">
-          <div class="icon">🧱</div>
-          <div>
-            <div class="title">Architecture</div>
-            <div class="desc">Systemarchitektur, ENV &amp; Diagramm</div>
-          </div>
-        </a>
-        <a class="card" id="navRCM" href="#" target="_blank" rel="noopener">
-          <div class="icon">🔁</div>
-          <div>
-            <div class="title">Release &amp; Change Management</div>
-            <div class="desc">Versioning, Tags, Changelog, Strategies</div>
-          </div>
-        </a>
-        <a class="card" id="navTrouble" href="#" target="_blank" rel="noopener">
-          <div class="icon">🛠</div>
-          <div>
-            <div class="title">Troubleshooting</div>
-            <div class="desc">Häufige Fehler &amp; Lösungen</div>
-          </div>
-        </a>
-        <a class="card" id="navGlossary" href="#" target="_blank" rel="noopener">
-          <div class="icon">📚</div>
-          <div>
-            <div class="title">Glossary</div>
-            <div class="desc">Begriffe &amp; Abkürzungen</div>
-          </div>
-        </a>
-        <a class="card" id="navContrib" href="#" target="_blank" rel="noopener">
-          <div class="icon">🤝</div>
-          <div>
-            <div class="title">Contributing</div>
-            <div class="desc">Branch-Strategie, PRs &amp; Reviews</div>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- QUICKSTART -->
-    <section class="section">
-      <h2 class="section-title">Schnellstart</h2>
-      <div class="code" id="codebox">
-        <button class="copy" id="copy">copy</button>
-<pre><code>git clone https://github.com/HSLU-Exercise/scope-your-project-gruppe_7.git
-cd scope-your-project-gruppe_7
-
-# Installation (je nach Projektechnologie)
-pip install -r requirements.txt   # Python
-npm install                      # Node.js
-
-# Server starten
-python app.py      # oder
-npm run dev</code></pre>
-      </div>
-      <div class="hint-row">
-        <div><span class="dot ok"></span><strong>Commit</strong> – Lint &amp; Tests laufen automatisch</div>
-        <div><span class="dot build"></span><strong>Build</strong> – Release-Artefakte werden versioniert</div>
-        <div><span class="dot deploy"></span><strong>Deploy</strong> – GitHub Pages / Cloud</div>
-      </div>
-    </section>
-
-    <!-- ARCHITEKTUR -->
-    <section class="section">
-      <h2 class="section-title">Systemarchitektur</h2>
-      <div class="arch">
-        <svg class="arch-svg" viewBox="0 0 980 280" role="img" aria-label="Frontend, API/Backend, DB, externe Services">
-          <!-- Pipes -->
-          <path class="pipe" d="M210,120 C280,120 380,120 450,120" />
-          <path class="pipe" d="M620,120 C680,120 740,100 780,100" />
-          <path class="pipe" d="M620,140 C710,170 820,170 860,170" />
-
-          <!-- Nodes -->
-          <g class="node front" transform="translate(110,90)">
-            <rect width="180" height="60"></rect>
-            <text class="lbl" x="24" y="37">Frontend / UI</text>
-          </g>
-          <g class="node api" transform="translate(450,90)">
-            <rect width="160" height="60"></rect>
-            <text class="lbl" x="26" y="37">API / Backend</text>
-          </g>
-          <g class="node db" transform="translate(780,70)">
-            <rect width="140" height="60"></rect>
-            <text class="lbl" x="26" y="37">Datenbank</text>
-          </g>
-          <g class="node ext" transform="translate(820,150)">
-            <rect width="160" height="60"></rect>
-            <text class="lbl" x="26" y="37">Externe Services</text>
-          </g>
-        </svg>
-        <div style="color:var(--muted); font-size:13px; margin-top:8px">
-          Trennung der Verantwortlichkeiten, klare Datenflüsse, Deployment-freundlich. Das Diagramm pulsiert sanft und zeigt Flussrichtung der Schnittstellen.
         </div>
-      </div>
-    </section>
-
-    <!-- TEAM -->
-    <section class="section">
-      <h2 class="section-title">Team</h2>
-      <div class="flex">
-        <div class="pill"><div class="avatar">UL</div><div><strong>Ulrich Luca</strong><br><small>Product Owner</small></div></div>
-        <div class="pill"><div class="avatar">NL</div><div><strong>Nikola Loosli</strong><br><small>Scrum Master</small></div></div>
-        <div class="pill"><div class="avatar">NB</div><div><strong>Nando Brauchi</strong><br><small>Release Manager / DevOps</small></div></div>
-        <div class="pill"><div class="avatar">JL</div><div><strong>Joshua Lipp</strong><br><small>Technical Writer / Change</small></div></div>
-        <div class="pill"><div class="avatar">AB</div><div><strong>André Bucheli</strong><br><small>QA Engineer</small></div></div>
-      </div>
-    </section>
-
-    <!-- TECH -->
-    <section class="section">
-      <h2 class="section-title">Technologien</h2>
-      <div class="flex">
-        <div class="pill"><div>⚙️</div><div><strong>Git &amp; GitHub Actions</strong><br><small>CI/CD & automatisierte Releases</small></div></div>
-        <div class="pill"><div>📄</div><div><strong>Markdown &amp; Wiki</strong><br><small>Strukturierte Doku &amp; Release Notes</small></div></div>
-        <div class="pill"><div>🧰</div><div><strong>Python / Node.js</strong><br><small>Release-Automation &amp; Simulation</small></div></div>
-        <div class="pill"><div>🧭</div><div><strong>Clean Architecture</strong><br><small>Wartbarkeit &amp; Skalierbarkeit</small></div></div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <div>© 2025 HSLU — Scope Your Project (Gruppe 7)</div>
-      <div class="nav">
-        <a class="link" id="lnkReadme" href="#" target="_blank" rel="noopener">📘 README</a>
-        <a class="link" id="lnkChangelog" href="#" target="_blank" rel="noopener">🧾 CHANGELOG</a>
-        <a class="link" id="lnkWikiHome" href="#" target="_blank" rel="noopener">📚 Wiki Home</a>
-        <a class="link" id="lnkIssues" href="#" target="_blank" rel="noopener">🐞 Issues</a>
-      </div>
-    </footer>
-  </div>
-
-<script>
-  // --- zentrale Links: bei Bedarf anpassen ---
-  const REPO = "https://github.com/HSLU-Exercise/scope-your-project-gruppe_7";
-  const LINKS = {
-    repo: REPO,
-    docs: REPO + "#readme",
-    readme: REPO + "#readme",
-    changelog: REPO + "/blob/main/CHANGELOG.md",
-    wikiHome: REPO + "/wiki",
-    wikiGetting: REPO + "/wiki/Getting-Started",
-    wikiArch: REPO + "/wiki/Architecture",
-    wikiRCM: REPO + "/wiki/Release-%26-Change-Management",
-    wikiTrouble: REPO + "/wiki/Troubleshooting",
-    wikiGlossary: REPO + "/wiki/Glossary",
-    wikiContrib: REPO + "/wiki/Contributing",
-    issues: REPO + "/issues"
-  };
-
-  // Buttons oben
-  document.getElementById("openDocs").href = LINKS.docs;
-  document.getElementById("openWiki").href = LINKS.wikiHome;
-  document.getElementById("openRepo").href = LINKS.repo;
-
-  // Navigator
-  document.getElementById("navGetting").href   = LINKS.wikiGetting;
-  document.getElementById("navArch").href      = LINKS.wikiArch;
-  document.getElementById("navRCM").href       = LINKS.wikiRCM;
-  document.getElementById("navTrouble").href   = LINKS.wikiTrouble;
-  document.getElementById("navGlossary").href  = LINKS.wikiGlossary;
-  document.getElementById("navContrib").href   = LINKS.wikiContrib;
-
-  // Footer
-  document.getElementById("lnkReadme").href    = LINKS.readme;
-  document.getElementById("lnkChangelog").href = LINKS.changelog;
-  document.getElementById("lnkWikiHome").href  = LINKS.wikiHome;
-  document.getElementById("lnkIssues").href    = LINKS.issues;
-
-  // Copy button
-  const copyBtn = document.getElementById('copy');
-  copyBtn.addEventListener('click', async () => {
-    const code = document.querySelector('#codebox pre').innerText;
-    try {
-      await navigator.clipboard.writeText(code);
-      copyBtn.textContent = 'copied!';
-      setTimeout(()=>copyBtn.textContent='copy',1200);
-    } catch(e){
-      copyBtn.textContent = 'failed';
-    }
-  });
-
-  // kleine parallax Hover-Motion auf Cards
-  document.querySelectorAll('.card').forEach((el)=>{
-    el.addEventListener('mousemove',(e)=>{
-      const r = el.getBoundingClientRect();
-      const x = e.clientX - r.left, y = e.clientY - r.top;
-      const rx = ((y/r.height)-.5)*4, ry = ((x/r.width)-.5)*-6;
-      el.style.transform = `translateY(-3px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    });
-    el.addEventListener('mouseleave',()=>{ el.style.transform='translateY(-3px)'; });
-  });
-</script>
-</body>
+        <nav><a href="#menu">Menu</a><a href="#zeiten">Zeiten</a><a href="#kontakt">Kontakt</a></nav>
+      </header>
+      <section class="hero">
+        <div class="panel">
+          <div class="eyebrow">Willkommen</div>
+          <h2 class="title">Guter Kaffee, hausgemachtes Gebäck, ruhige Atmosphäre.</h2>
+          <p class="lede">Ob kurzer Stopp auf dem Weg zur Arbeit oder gemütliche Pause am Nachmittag – bei uns findest du einfache Klassiker und freundlichen Service.</p>
+        </div>
+        <aside class="panel">
+          <div class="eyebrow">Heute</div>
+          <h3 style="margin:8px 0">Empfehlungen</h3>
+          <ul class="list">
+            <li><span>Flat White</span><span>4.80</span></li>
+            <li><span>Zimt-Schnecke</span><span>3.20</span></li>
+            <li><span>Filterkaffee</span><span>3.50</span></li>
+          </ul>
+          <p class="muted" style="margin-top:8px">Preise in CHF. Solange Vorrat reicht.</p>
+        </aside>
+      </section>
+      <section id="menu" class="grid">
+        <div class="card">
+          <h3>Kaffee & Heissgetränke</h3>
+          <ul class="list">
+            <li><span>Espresso</span><span>3.20</span></li>
+            <li><span>Cappuccino</span><span>4.50</span></li>
+            <li><span>Latte</span><span>4.80</span></li>
+            <li><span>Heisse Schokolade</span><span>4.20</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Gebäck</h3>
+          <ul class="list">
+            <li><span>Butter-Gipfeli</span><span>2.20</span></li>
+            <li><span>Banana Bread</span><span>3.80</span></li>
+            <li><span>Brownie</span><span>3.50</span></li>
+            <li><span>Granola Becher</span><span>4.20</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Kaltes</h3>
+          <ul class="list">
+            <li><span>Eistee Hausgemacht</span><span>3.90</span></li>
+            <li><span>Limonade</span><span>3.50</span></li>
+            <li><span>Wasser still/sprudel</span><span>2.50</span></li>
+          </ul>
+        </div>
+      </section>
+      <section id="zeiten" class="grid" style="margin-top:14px">
+        <div class="card">
+          <h3>Öffnungszeiten</h3>
+          <ul class="list">
+            <li><span>Mo–Fr</span><span>07:30 – 18:00</span></li>
+            <li><span>Sa</span><span>08:00 – 16:00</span></li>
+            <li><span>So</span><span>geschlossen</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Adresse</h3>
+          <p>Hauptstrasse 12<br>8000 Zürich</p>
+          <p class="muted">Tram und Bus in 2 Gehminuten.</p>
+        </div>
+        <div id="kontakt" class="card">
+          <h3>Kontakt</h3>
+          <p>E-Mail: hallo@coffeeandchill.example<br>Telefon: 044 000 00 00</p>
+          <p class="muted">Vorbestellungen gerne telefonisch.</p>
+        </div>
+      </section>
+      <footer>
+        <div>© <span id="year"></span> Coffe & Chill</div>
+        <div class="muted">v1.0.0</div>
+      </footer>
+    </div>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
