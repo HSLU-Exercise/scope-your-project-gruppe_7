@@ -6,6 +6,29 @@ und folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ---
 
+## [3.0.0](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v2.1.0...v3.0.0) (2025-10-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* Major Change - New Design
+* Initial release
+
+### Features
+
+* Feature Flag Dark Mode ([d721dd4](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/d721dd49372326b42c23293473675b1f2eb41382))
+* Initial release ([e77bdde](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/e77bdde17b4c4d44c413bbb9be5190a1b2cbc070))
+* Major Change - New Design ([64c58f0](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/64c58f05f842888fb5b40fbc6a8d3451524dcb8f))
+
+
+### Bug Fixes
+
+* GitHub Actions workflow for release notes ([4fac8c7](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/4fac8c7e44864191f25b0bbaa0d83015af450a37))
+* Refactor CHANGELOG.md for clarity and consistency ([11541c5](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/11541c52243bef06b58c462ddb6b0351ecdfd0a7))
+* Refine require-changelog workflow conditions ([9c1e53d](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/9c1e53d10b798bf8667e39e683a2439015780cf3))
+* rename logo file to match README path ([0ba9d34](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/0ba9d340bab25c1ebbdd6944de7d766b67addc03))
+* Schreibfehler behoben ([e9adad2](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/e9adad2fe8f572e204776620de2e1d0b2b8f83da))
+
 ## [2.1.0](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v2.0.1...v2.1.0) (2025-10-25)
 
 
