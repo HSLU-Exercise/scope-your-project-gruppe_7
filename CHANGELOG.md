@@ -6,15 +6,5 @@ und folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ---
 
-## [1.0.2](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v1.0.1...v1.0.2) (2025-10-23)
 
-
-### Bug Fixes
-
-* Refactor CHANGELOG.md for clarity and consistency ([11541c5](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/11541c52243bef06b58c462ddb6b0351ecdfd0a7))
-
-## [1.0.1](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/compare/v1.0.0...v1.0.1) (2025-10-19)
-
-### Bug Fixes
-- GitHub Actions workflow for release notes ([4fac8c7](https://github.com/HSLU-Exercise/scope-your-project-gruppe_7/commit/4fac8c7e44864191f25b0bbaa0d83015af450a37))
 
